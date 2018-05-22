@@ -27,16 +27,18 @@ public class streamUtils {
 	}
 
 	public static void FileCopy(String sPath, String dPath) throws IOException {
-		try
-		//()
+		try(
+			FileOutputStream outputstream = new FileOutputStream(new File(dPath));
+			FileInputStream inputstream = new FileInputStream(new File(sPath));
+		)
 		{
-			File inputFile = new File(sPath);
-			File outputFile = new File(dPath);
-			if(!outputFile.exists()){
-				outputFile.createNewFile();
-			}
-			FileOutputStream outputstream = new FileOutputStream(outputFile);
-			FileInputStream inputstream = new FileInputStream(inputFile);
+			// File inputFile = new File(sPath);
+			// File outputFile = new File(dPath);
+			// if(!outputFile.exists()){
+			// 	outputFile.createNewFile();
+			// }
+			//FileOutputStream outputstream = new FileOutputStream(outputFile);
+			//FileInputStream inputstream = new FileInputStream(inputFile);
 			copy(inputstream, outputstream);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
