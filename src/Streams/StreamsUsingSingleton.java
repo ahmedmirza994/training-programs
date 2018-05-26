@@ -18,7 +18,10 @@ public class StreamsUsingSingleton {
 	
 	public static StreamsUsingSingleton getInstance() {
 		if(SUS == null){
-			SUS = new StreamsUsingSingleton();
+			synchronized(StreamsUsingSingleton.class){
+				if(SUS == null)
+					SUS = new StreamsUsingSingleton();
+			}
 		}
 		return SUS;
 	}
@@ -74,6 +77,10 @@ public class StreamsUsingSingleton {
 	public static void main(String[] args) throws IOException {
 		StreamsUsingSingleton.getInstance().FileCopy("urlContent.txt", "dPath.txt");
 		StreamsUsingSingleton.getInstance().getDataFromUrl("http://lorempixel.com/400/200/", "image.jpg");
+		StreamsUsingSingleton.getInstance().getDataFromUrl("http://lorempixel.com/400/200/", "image1.jpg");
+		StreamsUsingSingleton.getInstance().getDataFromUrl("http://lorempixel.com/400/200/", "image2.jpg");
+		StreamsUsingSingleton.getInstance().getDataFromUrl("http://lorempixel.com/400/200/", "image3.jpg");
+		StreamsUsingSingleton.getInstance().getDataFromUrl("http://lorempixel.com/400/200/", "image4.jpg");
 	}
 	
 
